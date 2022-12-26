@@ -7,11 +7,9 @@
 #pragma pack(1)
 struct BitmapFileHeader_t {
     BitmapFileHeader_t() : BitmapFileHeader_t(0) {}
-    BitmapFileHeader_t(Image image) : BitmapFileHeader_t(image.Width * image.Height * sizeof(RGBTriple) + 54)
-    {
-    }
-
     BitmapFileHeader_t(DWORD size) : Type(0x4D42), Size(size), Reserved1(0), Reserved2(0), OffBits(54) {}
+    BitmapFileHeader_t(Image image) :
+        BitmapFileHeader_t(image.Width * image.Height * sizeof(RGBTriple) + 54) {}
 
     WORD Type;      // FileType - must be "BM" (or 0x42 0x4D or 19778 or 0x4D42)
     DWORD Size;     // Size, in bytes, of the bitmap file
@@ -27,9 +25,7 @@ struct BitmapInfoHeader_t {
     BitmapInfoHeader_t(Image image) : BitmapInfoHeader_t(image.Width, image.Height) {}
     BitmapInfoHeader_t(LONG width, LONG height) :
         Size(40), Width(width), Height(height), Planes(1), BitCount(24), Compression(0), SizeImage(0),
-        XPelsPerMeter(0), YPelsPerMeter(0), ClrUsed(0), ClrImportant(0)
-    {
-    }
+        XPelsPerMeter(0), YPelsPerMeter(0), ClrUsed(0), ClrImportant(0) {}
 
     DWORD Size;         // Number of bytes required by the structure
     LONG Width;         // Width of the bitmap in pixels
@@ -45,8 +41,7 @@ struct BitmapInfoHeader_t {
 };
 #pragma pack()
 
-Image ReadImageFromBmp(const std::string& path)
-{
+Image ReadImageFromBmp(const std::string& path) {
     std::ifstream ifile(path, std::ios::in | std::ios::binary);
     if (!ifile.is_open()) {
         // Handle Error
@@ -67,8 +62,7 @@ Image ReadImageFromBmp(const std::string& path)
     return image;
 }
 
-void WriteImageToBmp(const std::string& path, const Image& image)
-{
+void WriteImageToBmp(const std::string& path, const Image& image) {
     std::ofstream ofile(path, std::ios::out | std::ios::binary);
     if (!ofile.is_open()) {
         // Handle Error

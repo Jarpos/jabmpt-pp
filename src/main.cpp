@@ -7,8 +7,7 @@
 Image ReadImageFromBmp(const std::string& inpath);
 void WriteImageToBmp(const std::string& path, const Image& image);
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
     if (argc != 3) {
         std::cerr << "Given amount of args was not correct" << std::endl;
         return EXIT_FAILURE;

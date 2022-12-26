@@ -23,8 +23,7 @@ struct RGBTriple {
     BYTE Green; // Green channel
     BYTE Red;   // Red channel
 
-    void Set(BYTE red, BYTE green, BYTE blue)
-    {
+    void Set(BYTE red, BYTE green, BYTE blue) {
         Red = red;
         Green = green;
         Blue = blue;
@@ -35,16 +34,13 @@ struct RGBTriple {
 
 struct Image {
     Image(LONG width, LONG height) :
-        Width(width), Height(height), Pixels(height, std::vector<RGBTriple>(width, RGBTriple()))
-    {
-    }
+        Width(width), Height(height), Pixels(height, std::vector<RGBTriple>(width, RGBTriple())) {}
 
     LONG Width;
     LONG Height;
     std::vector<std::vector<RGBTriple>> Pixels;
 
-    constexpr BYTE Padding() const
-    {
+    constexpr BYTE Padding() const {
         return 4 - (Width * sizeof(RGBTriple) % 4) % 4;
     }
 };

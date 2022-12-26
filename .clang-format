@@ -11,7 +11,10 @@ AllowShortLoopsOnASingleLine: 'true'
 AlwaysBreakAfterReturnType: None
 AlwaysBreakTemplateDeclarations: 'Yes'
 BinPackParameters: 'false'
-BreakBeforeBraces: Linux
+
+# Change this if functions should have { on the next line
+BreakBeforeBraces: Custom
+
 BreakBeforeTernaryOperators: 'false'
 BreakConstructorInitializers: AfterColon
 ColumnLimit: '110'
