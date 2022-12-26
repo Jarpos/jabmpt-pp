@@ -4,10 +4,15 @@
 #include <iostream>
 #include <string>
 
-int main()
+int main(int argc, char* argv[])
 {
-    std::string inpath = "../Hallway.bmp";
-    std::string outpath = "../Out.bmp";
+    if (argc != 3) {
+        std::cerr << "Given amount of args was not correct" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    std::string inpath = argv[1];
+    std::string outpath = argv[2];
 
     std::ifstream ifile(inpath, std::ios::in | std::ios::binary);
     if (!ifile.is_open()) {
