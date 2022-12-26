@@ -30,7 +30,7 @@ struct BitmapInfoHeader_t {
     DWORD SizeImage;    // The size in bytes of the image (zero for uncompressed bmps)
     LONG XPelsPerMeter; // Horizontal resolution in pixels-per-meter
     LONG YPelsPerMeter; // Vertical resolution in pixels-per-meter
-    DWORD ClrUsed; // The number of color indexes in the color table (See above link for more infos)
+    DWORD ClrUsed;      // The number of color indexes in the color table (See above link for more infos)
     DWORD ClrImportant; // The number of color indexes that are required for displaying the bitmap
 };
 
@@ -39,9 +39,10 @@ struct RGBTriple {
     RGBTriple() : RGBTriple(0, 0, 0) {}
     RGBTriple(BYTE red, BYTE green, BYTE blue) : Red(red), Green(green), Blue(blue) {}
 
-    BYTE Red;   // Red channel
-    BYTE Green; // Green channel
+    // Members have to be sorted like this, because of Endianess
     BYTE Blue;  // Blue channel
+    BYTE Green; // Green channel
+    BYTE Red;   // Red channel
 
     void Set(BYTE red, BYTE green, BYTE blue)
     {
@@ -55,13 +56,16 @@ struct RGBTriple {
 
 struct Image {
     Image(LONG width, LONG height) :
-        Width(width), Height(height), Padding(4 - (width * sizeof(RGBTriple) % 4) % 4),
-        Pixels(height, std::vector<RGBTriple>(width, RGBTriple()))
+        Width(width), Height(height), Pixels(height, std::vector<RGBTriple>(width, RGBTriple()))
     {
     }
 
     LONG Width;
     LONG Height;
-    BYTE Padding;
     std::vector<std::vector<RGBTriple>> Pixels;
+
+    constexpr BYTE Padding() const
+    {
+        return 4 - (Width * sizeof(RGBTriple) % 4) % 4;
+    }
 };
