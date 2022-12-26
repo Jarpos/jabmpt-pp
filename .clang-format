@@ -14,7 +14,7 @@ BinPackParameters: 'false'
 BreakBeforeBraces: Linux
 BreakBeforeTernaryOperators: 'false'
 BreakConstructorInitializers: AfterColon
-ColumnLimit: '100'
+ColumnLimit: '110'
 CompactNamespaces: 'false'
 ContinuationIndentWidth: '4'
 Cpp11BracedListStyle: 'false'
