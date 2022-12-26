@@ -1,0 +1,33 @@
+---
+# Configured via this: https://zed0.co.uk/clang-format-configurator/
+AlignEscapedNewlines: Left
+AlignTrailingComments: 'true'
+AllowAllArgumentsOnNextLine: 'true'
+AllowAllConstructorInitializersOnNextLine: 'true'
+AllowShortCaseLabelsOnASingleLine: 'true'
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortLambdasOnASingleLine: Empty
+AllowShortLoopsOnASingleLine: 'true'
+AlwaysBreakAfterReturnType: None
+AlwaysBreakTemplateDeclarations: 'Yes'
+BinPackParameters: 'false'
+BreakBeforeBraces: Linux
+BreakBeforeTernaryOperators: 'false'
+BreakConstructorInitializers: AfterColon
+ColumnLimit: '100'
+CompactNamespaces: 'false'
+ContinuationIndentWidth: '4'
+Cpp11BracedListStyle: 'false'
+FixNamespaceComments: 'true'
+IncludeBlocks: Regroup
+IndentPPDirectives: BeforeHash
+IndentWidth: '4'
+NamespaceIndentation: Inner
+PointerAlignment: Left
+SpaceAfterCStyleCast: 'false'
+SpaceAfterTemplateKeyword: 'false'
+SpaceBeforeAssignmentOperators: 'true'
+SpaceBeforeCpp11BracedList: 'true'
+SpaceBeforeCtorInitializerColon: 'true'
+SpaceBeforeInheritanceColon: 'true'
+UseTab: Never
