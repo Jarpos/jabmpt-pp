@@ -8,8 +8,8 @@
 struct BitmapFileHeader_t {
     BitmapFileHeader_t() : BitmapFileHeader_t(0) {}
     BitmapFileHeader_t(DWORD size) : Type(0x4D42), Size(size), Reserved1(0), Reserved2(0), OffBits(54) {}
-    BitmapFileHeader_t(Image image) :
-        BitmapFileHeader_t(image.Width * image.Height * sizeof(RGBTriple) + 54) {}
+    BitmapFileHeader_t(Image i) :
+        BitmapFileHeader_t(i.Width * i.Height * sizeof(RGBTriple) + i.Height * i.Padding() + 54) {}
 
     WORD Type;      // FileType - must be "BM" (or 0x42 0x4D or 19778 or 0x4D42)
     DWORD Size;     // Size, in bytes, of the bitmap file
@@ -17,6 +17,7 @@ struct BitmapFileHeader_t {
     WORD Reserved2; // Reserved - must be zero
     DWORD OffBits;  // The offset, in bytes, from the beginning of this to the bitmap bits
 };
+#pragma pack()
 
 // See: https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapinfoheader
 #pragma pack(1)
