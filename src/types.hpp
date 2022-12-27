@@ -23,10 +23,22 @@ struct RGBTriple {
     BYTE Green; // Green channel
     BYTE Red;   // Red channel
 
-    void Set(BYTE red, BYTE green, BYTE blue) {
+    constexpr void Set(BYTE red, BYTE green, BYTE blue) {
         Red = red;
         Green = green;
         Blue = blue;
+    }
+
+    constexpr void SetAll(BYTE value) {
+        Set(value, value, value);
+    }
+
+    constexpr BYTE Average() const {
+        return (Red + Green + Blue) / 3;
+    }
+
+    static const RGBTriple Null() {
+        return RGBTriple();
     }
 };
 #pragma pack()
@@ -36,15 +48,19 @@ struct Image {
 
     std::vector<std::vector<RGBTriple>> Pixels;
 
-    constexpr LONG Width() const {
+    constexpr size_t Width() const {
         return Pixels.at(0).size();
     }
 
-    constexpr LONG Height() const {
+    constexpr size_t Height() const {
         return Pixels.size();
     }
 
     constexpr BYTE Padding() const {
         return 4 - (Width() * sizeof(RGBTriple) % 4) % 4;
+    }
+
+    RGBTriple& Get(size_t y, size_t x, RGBTriple def = RGBTriple {}) {
+        return (y < Height() && x < Width()) ? Pixels[y][x] : def;
     }
 };
