@@ -1,4 +1,5 @@
-﻿#include "types.hpp"
+#include "types.hpp"
+#include "transform/transformations.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -6,12 +7,6 @@
 
 Image ReadImageFromBmp(const std::string& inpath);
 void WriteImageToBmp(const std::string& path, const Image& image);
-
-namespace transform {
-void BlackAndWhite(Image& image);
-void FlipX(Image& image);
-void FlipY(Image& image);
-} // namespace transform
 
 int main(int argc, char* argv[]) {
     if (argc != 3) {
@@ -23,9 +18,9 @@ int main(int argc, char* argv[]) {
     std::string outpath = argv[2];
 
     Image image = ReadImageFromBmp(inpath);
-    transform::BlackAndWhite(image);
-    transform::FlipY(image);
-    transform::FlipX(image);
+    transform::Transformations.at('w').Function(image);
+    transform::Transformations.at('y').Function(image);
+    transform::Transformations.at('x').Function(image);
     WriteImageToBmp(outpath, image);
 
     return EXIT_SUCCESS;
