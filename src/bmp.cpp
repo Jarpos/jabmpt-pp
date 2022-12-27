@@ -48,13 +48,15 @@ Image ReadImageFromBmp(const std::string& path) {
         // Handle Error
     }
 
+    // Read File Header & Info Header
     BitmapFileHeader_t fileHeader {};
     BitmapInfoHeader_t infoHeader {};
     ifile.read(reinterpret_cast<char*>(&fileHeader), sizeof(fileHeader));
     ifile.read(reinterpret_cast<char*>(&infoHeader), sizeof(infoHeader));
 
-    ifile.seekg(fileHeader.OffBits, std::ios::beg);
+    // Read Bitmap
     Image image(infoHeader.Width, infoHeader.Height);
+    ifile.seekg(fileHeader.OffBits, std::ios::beg);
     for (int i = 0; i < infoHeader.Height; i++) {
         ifile.read(reinterpret_cast<char*>(&(image.Pixels[i][0])), infoHeader.Width * sizeof(RGBTriple));
         ifile.seekg(image.Padding(), std::ios::cur);
@@ -69,11 +71,13 @@ void WriteImageToBmp(const std::string& path, const Image& image) {
         // Handle Error
     }
 
+    // Write File Header & Info Header
     BitmapFileHeader_t fileHeader(image);
     BitmapInfoHeader_t infoHeader(image);
     ofile.write(reinterpret_cast<char*>(&fileHeader), sizeof(fileHeader));
     ofile.write(reinterpret_cast<char*>(&infoHeader), sizeof(infoHeader));
 
+    // Write Bitmap
     for (int i = 0; i < infoHeader.Height; i++) {
         ofile.write(reinterpret_cast<const char*>(&(image.Pixels[i][0])), image.Width() * sizeof(RGBTriple));
         for (int k = 0; k < image.Padding(); k++) {
