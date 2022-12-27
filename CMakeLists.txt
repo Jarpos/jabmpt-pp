@@ -7,4 +7,4 @@ project ("jabmpt-pp")
 
 # Include sub-projects.
 add_subdirectory ("src")
-file(COPY "test/Hallway.bmp" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
+file(COPY "test/Hallway.bmp" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/test")
