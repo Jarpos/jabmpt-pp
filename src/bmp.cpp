@@ -9,7 +9,7 @@ struct BitmapFileHeader_t {
     BitmapFileHeader_t() : BitmapFileHeader_t(0) {}
     BitmapFileHeader_t(DWORD size) : Type(0x4D42), Size(size), Reserved1(0), Reserved2(0), OffBits(54) {}
     BitmapFileHeader_t(Image i) :
-        BitmapFileHeader_t(i.Width * i.Height * sizeof(RGBTriple) + i.Height * i.Padding() + 54) {}
+        BitmapFileHeader_t(i.Width() * i.Height() * sizeof(RGBTriple) + i.Height() * i.Padding() + 54) {}
 
     WORD Type;      // FileType - must be "BM" (or 0x42 0x4D or 19778 or 0x4D42)
     DWORD Size;     // Size, in bytes, of the bitmap file
@@ -23,7 +23,7 @@ struct BitmapFileHeader_t {
 #pragma pack(1)
 struct BitmapInfoHeader_t {
     BitmapInfoHeader_t() : BitmapInfoHeader_t(0, 0) {}
-    BitmapInfoHeader_t(Image image) : BitmapInfoHeader_t(image.Width, image.Height) {}
+    BitmapInfoHeader_t(Image image) : BitmapInfoHeader_t(image.Width(), image.Height()) {}
     BitmapInfoHeader_t(LONG width, LONG height) :
         Size(40), Width(width), Height(height), Planes(1), BitCount(24), Compression(0), SizeImage(0),
         XPelsPerMeter(0), YPelsPerMeter(0), ClrUsed(0), ClrImportant(0) {}
@@ -75,7 +75,7 @@ void WriteImageToBmp(const std::string& path, const Image& image) {
     ofile.write(reinterpret_cast<char*>(&infoHeader), sizeof(infoHeader));
 
     for (int i = 0; i < infoHeader.Height; i++) {
-        ofile.write(reinterpret_cast<const char*>(&(image.Pixels[i][0])), image.Width * sizeof(RGBTriple));
+        ofile.write(reinterpret_cast<const char*>(&(image.Pixels[i][0])), image.Width() * sizeof(RGBTriple));
         for (int k = 0; k < image.Padding(); k++) {
             ofile.write("\0", sizeof(BYTE));
         }

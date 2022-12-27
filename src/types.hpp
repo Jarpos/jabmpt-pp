@@ -29,18 +29,22 @@ struct RGBTriple {
         Blue = blue;
     }
 };
-
 #pragma pack()
 
 struct Image {
-    Image(LONG width, LONG height) :
-        Width(width), Height(height), Pixels(height, std::vector<RGBTriple>(width, RGBTriple())) {}
+    Image(LONG width, LONG height) : Pixels(height, std::vector<RGBTriple>(width, RGBTriple())) {}
 
-    LONG Width;
-    LONG Height;
     std::vector<std::vector<RGBTriple>> Pixels;
 
+    constexpr LONG Width() const {
+        return Pixels.at(0).size();
+    }
+
+    constexpr LONG Height() const {
+        return Pixels.size();
+    }
+
     constexpr BYTE Padding() const {
-        return 4 - (Width * sizeof(RGBTriple) % 4) % 4;
+        return 4 - (Width() * sizeof(RGBTriple) % 4) % 4;
     }
 };
