@@ -1,9 +1,9 @@
-﻿# CMakeList.txt : CMake project for jabmpt-pp, include source and define
+# CMakeList.txt : CMake project for jabmpt-pp, include source and define
 # project specific logic here.
 #
 
 # Add source to this project's executable.
-add_executable (jabmpt-pp "main.cpp" "types.hpp" "bmp.cpp" "transform/blackwhite.cpp" "transform/flip.cpp")
+add_executable (jabmpt-pp "main.cpp" "bmp.cpp" "transform/blackwhite.cpp" "transform/flip.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
     set_property(TARGET jabmpt-pp PROPERTY CXX_STANDARD 20)
