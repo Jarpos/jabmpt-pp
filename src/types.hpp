@@ -60,6 +60,10 @@ struct Image {
         return 4 - (Width() * sizeof(RGBTriple) % 4) % 4;
     }
 
+    RGBTriple Get(size_t y, size_t x, RGBTriple def = RGBTriple {}) const {
+        return (y < Height() && x < Width()) ? Pixels[y][x] : def;
+    }
+
     RGBTriple& Get(size_t y, size_t x, RGBTriple def = RGBTriple {}) {
         return (y < Height() && x < Width()) ? Pixels[y][x] : def;
     }
