@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <cstdint>
 #include <vector>
@@ -60,7 +60,7 @@ struct Image {
         return 4 - (Width() * sizeof(RGBTriple) % 4) % 4;
     }
 
-    RGBTriple Get(size_t y, size_t x, RGBTriple def = RGBTriple {}) const {
+    const RGBTriple& Get(size_t y, size_t x, RGBTriple def = RGBTriple {}) const {
         return (y < Height() && x < Width()) ? Pixels[y][x] : def;
     }
 
