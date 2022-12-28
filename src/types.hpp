@@ -48,15 +48,15 @@ struct Image {
 
     std::vector<std::vector<RGBTriple>> Pixels;
 
-    constexpr size_t Width() const {
+    size_t Width() const {
         return Pixels.at(0).size();
     }
 
-    constexpr size_t Height() const {
+    size_t Height() const {
         return Pixels.size();
     }
 
-    constexpr BYTE Padding() const {
+    BYTE Padding() const {
         return 4 - (Width() * sizeof(RGBTriple) % 4) % 4;
     }
 
