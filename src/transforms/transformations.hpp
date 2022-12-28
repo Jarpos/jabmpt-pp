@@ -5,7 +5,7 @@
 #include <functional>
 #include <unordered_map>
 
-namespace transform {
+namespace transforms {
 
 void BlackAndWhite(Image& image);
 void FlipX(Image& image);

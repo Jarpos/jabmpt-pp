@@ -18,9 +18,9 @@ int main(int argc, char* argv[]) {
     std::string outpath = argv[2];
 
     Image image = ReadImageFromBmp(inpath);
-    transform::Transformations.at('w').Function(image);
-    transform::Transformations.at('y').Function(image);
-    transform::Transformations.at('x').Function(image);
+    transforms::Transformations.at('w').Function(image);
+    transforms::Transformations.at('y').Function(image);
+    transforms::Transformations.at('x').Function(image);
     WriteImageToBmp(outpath, image);
 
     return EXIT_SUCCESS;

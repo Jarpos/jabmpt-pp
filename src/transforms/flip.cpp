@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-namespace transform {
+namespace transforms {
 
 void FlipX(Image& image) {
     for (int y = 0; y < image.Height(); y++) {

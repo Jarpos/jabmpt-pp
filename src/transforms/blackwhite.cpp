@@ -1,6 +1,6 @@
 #include "../types.hpp"
 
-namespace transform {
+namespace transforms {
 
 void BlackAndWhite(Image& image) {
     for (int y = 0; y < image.Height(); y++) {
