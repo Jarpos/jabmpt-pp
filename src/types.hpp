@@ -10,13 +10,13 @@ typedef int32_t LONG;
 
 struct BitmapFileHeader_t;
 struct BitmapInfoHeader_t;
-struct RGBTriple;
+struct RgbValue;
 struct Image;
 
 #pragma pack(1)
-struct RGBTriple {
-    RGBTriple() : RGBTriple(0, 0, 0) {}
-    RGBTriple(BYTE red, BYTE green, BYTE blue) : Red(red), Green(green), Blue(blue) {}
+struct RgbValue {
+    RgbValue() : RgbValue(0, 0, 0) {}
+    RgbValue(BYTE red, BYTE green, BYTE blue) : Red(red), Green(green), Blue(blue) {}
 
     // Members have to be sorted like this, because of Endianess
     BYTE Blue;  // Blue channel
@@ -36,17 +36,13 @@ struct RGBTriple {
     constexpr BYTE Average() const {
         return (Red + Green + Blue) / 3;
     }
-
-    static const RGBTriple Null() {
-        return RGBTriple();
-    }
 };
 #pragma pack()
 
 struct Image {
-    Image(LONG width, LONG height) : Pixels(height, std::vector<RGBTriple>(width, RGBTriple())) {}
+    Image(LONG width, LONG height) : Pixels(height, std::vector<RgbValue>(width, RgbValue())) {}
 
-    std::vector<std::vector<RGBTriple>> Pixels;
+    std::vector<std::vector<RgbValue>> Pixels;
 
     size_t Width() const {
         return Pixels.at(0).size();
@@ -57,14 +53,14 @@ struct Image {
     }
 
     BYTE Padding() const {
-        return 4 - (Width() * sizeof(RGBTriple) % 4) % 4;
+        return 4 - (Width() * sizeof(RgbValue) % 4) % 4;
     }
 
-    const RGBTriple& Get(size_t y, size_t x, RGBTriple def = RGBTriple {}) const {
-        return (y < Height() && x < Width()) ? Pixels[y][x] : def;
+    const RgbValue& At(size_t y, size_t x) const {
+        return Pixels.at(y).at(x);
     }
 
-    RGBTriple& Get(size_t y, size_t x, RGBTriple def = RGBTriple {}) {
-        return (y < Height() && x < Width()) ? Pixels[y][x] : def;
+    RgbValue& At(size_t y, size_t x) {
+        return Pixels.at(y).at(x);
     }
 };
