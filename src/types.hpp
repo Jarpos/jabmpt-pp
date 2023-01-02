@@ -1,6 +1,8 @@
 #pragma once
 
+#include <array>
 #include <cstdint>
+#include <list>
 #include <vector>
 
 typedef uint8_t BYTE;
@@ -62,5 +64,24 @@ struct Image {
 
     RgbValue& At(size_t y, size_t x) {
         return Pixels.at(y).at(x);
+    }
+
+    std::list<RgbValue> GetSurrounding(size_t y, size_t x) {
+        std::array<std::pair<int, int>, 9> Indices = {
+            std::pair { -1, -1 }, { -1, +0 }, { -1, +1 },
+            /*******/ { +0, -1 }, { +0, +0 }, { +0, +1 },
+            /*******/ { +1, -1 }, { +1, +0 }, { +1, +1 },
+        };
+
+        std::list<RgbValue> surrounding {};
+        for (const auto& i : Indices) {
+            if (y + i.first >= 0 && y + i.first < Height()) {
+                if (x + i.second >= 0 && x + i.second < Width()) {
+                    surrounding.emplace_front(At(y + i.first, x + i.second));
+                }
+            }
+        }
+
+        return surrounding;
     }
 };
