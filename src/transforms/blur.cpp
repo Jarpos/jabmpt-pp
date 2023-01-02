@@ -7,8 +7,8 @@ namespace transforms {
 void Blur(Image& image) {
     for (int y = 0; y < image.Height(); y++) {
         for (int x = 0; x < image.Width(); x++) {
-            image.At(y, x).SetAll(0);
             std::list<RgbValue> cells = image.GetSurrounding(y, x);
+            image.At(y, x).SetAll(0);
 
             // TODO: Maybe change this, to account for integer rounding?
             for (const auto& cell : cells) {
