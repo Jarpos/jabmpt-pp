@@ -7,6 +7,7 @@
 
 namespace transforms {
 
+void Blur(Image& image);
 void BlackAndWhite(Image& image);
 void FlipX(Image& image);
 void FlipY(Image& image);
@@ -20,6 +21,7 @@ struct Transformation {
 };
 
 const std::unordered_map<char, Transformation> Transformations = {
+    { 'b', { Blur, "Blurs the image", /****/ "Blured" } },
     { 'w', { BlackAndWhite, "Makes image black and white", /************/ "Made black and white" } },
     { 'x', { FlipX, "Flips the image on the X axis (right to left)", /**/ "Flipped on X-Axis" } },
     { 'y', { FlipY, "Flips the image on the Y axis (upside down)", /****/ "Flipped on Y-Axis" } },

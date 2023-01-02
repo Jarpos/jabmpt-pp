@@ -3,7 +3,7 @@
 #
 
 # Add source to this project's executable.
-add_executable (jabmpt-pp "main.cpp" "bmp.cpp" "transforms/blackwhite.cpp" "transforms/flip.cpp")
+add_executable (jabmpt-pp "main.cpp" "bmp.cpp" "transforms/blackwhite.cpp" "transforms/flip.cpp" "transforms/blur.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
     set_property(TARGET jabmpt-pp PROPERTY CXX_STANDARD 20)
