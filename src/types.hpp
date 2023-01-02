@@ -44,6 +44,8 @@ struct RgbValue {
 struct Image {
     Image(LONG width, LONG height) : Pixels(height, std::vector<RgbValue>(width, RgbValue())) {}
 
+    Image(const Image& image) = default;
+
     std::vector<std::vector<RgbValue>> Pixels;
 
     size_t Width() const {
