@@ -9,6 +9,7 @@ Image ReadImageFromBmp(const std::string& inpath);
 void WriteImageToBmp(const std::string& path, const Image& image);
 
 void PrintHelp();
+std::string GetInput();
 
 int main(int argc, char* argv[]) {
     if (argc != 3) {
@@ -21,20 +22,15 @@ int main(int argc, char* argv[]) {
 
     PrintHelp();
     std::string input;
-    std::cout << "> ";
-    std::getline(std::cin, input);
-    while (input != "") {
+    while ((input = GetInput()) != "") {
         const auto& t = transforms::Transformations.find(input[0]);
-
         if (t == transforms::Transformations.end()) {
             std::cout << "Couldn't find function " << input[0] << "\n";
-        } else {
-            t->second.Function(image);
-            std::cout << t->second.ActionDescription << "\n";
+            continue;
         }
 
-        std::cout << "> ";
-        std::getline(std::cin, input);
+        t->second.Function(image);
+        std::cout << t->second.ActionDescription << "\n";
     }
 
     WriteImageToBmp(outpath, image);
@@ -49,10 +45,9 @@ void PrintHelp() {
     std::cout << "\n";
 }
 
-// transforms::Transformations.at('b').Function(image);
-// transforms::Transformations.at('w').Function(image);
-// transforms::Transformations.at('y').Function(image);
-// transforms::Transformations.at('x').Function(image);
-// transforms::Transformations.at('r').Function(image);
-// transforms::Transformations.at('g').Function(image);
-// transforms::Transformations.at('b').Function(image);
+std::string GetInput() {
+    std::cout << "> ";
+    std::string input;
+    std::getline(std::cin, input);
+    return input;
+}
