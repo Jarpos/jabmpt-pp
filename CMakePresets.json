@@ -59,14 +59,14 @@
         },
         {
             "name": "linux-gcc-base",
-            "displayName": "GCC 9.4.0 x86_64-linux-gnu",
-			"generator": "Unix Makefiles",
+            "displayName": "GCC 10.3.0 x86_64-linux-gnu",
+            "generator": "Unix Makefiles",
             "description": "Using compilers: C = /usr/bin/gcc, CXX = /usr/bin/g++",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",
                 "CMAKE_C_COMPILER": "gcc",
-                "CMAKE_CXX_COMPILER": "g++",
+                "CMAKE_CXX_COMPILER": "g++-10",
                 "CMAKE_BUILD_TYPE": "Debug"
             }
         }
