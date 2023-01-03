@@ -10,4 +10,4 @@ void BlackAndWhite(Image& image) {
     }
 }
 
-} // namespace transform
+} // namespace transforms

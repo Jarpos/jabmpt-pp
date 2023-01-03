@@ -14,4 +14,4 @@ void FlipY(Image& image) {
     std::reverse(image.Pixels.begin(), image.Pixels.end());
 }
 
-} // namespace transform
+} // namespace transforms
