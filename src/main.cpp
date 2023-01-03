@@ -24,13 +24,12 @@ int main(int argc, char* argv[]) {
     std::string input;
     while ((input = GetInput()) != "") {
         const auto& t = transforms::Transformations.find(input[0]);
-        if (t == transforms::Transformations.end()) {
-            std::cout << "Couldn't find function " << input[0] << "\n";
-            continue;
+        if (t != transforms::Transformations.end()) {
+            t->second.Function(image);
+            std::cout << t->second.ActionDescription << "\n";
+        } else {
+            std::cout << "Couldn't find transformation " << input[0] << "\n";
         }
-
-        t->second.Function(image);
-        std::cout << t->second.ActionDescription << "\n";
     }
 
     WriteImageToBmp(outpath, image);
