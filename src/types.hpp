@@ -74,7 +74,7 @@ struct Image {
     }
 
     std::list<RgbValue> GetSurrounding(size_t y, size_t x) {
-        std::array<std::pair<int, int>, 9> Indices = {
+        constexpr std::array<std::pair<int, int>, 9> Indices = {
             std::pair { -1, -1 }, { -1, +0 }, { -1, +1 },
             /*******/ { +0, -1 }, { +0, +0 }, { +0, +1 },
             /*******/ { +1, -1 }, { +1, +0 }, { +1, +1 },
