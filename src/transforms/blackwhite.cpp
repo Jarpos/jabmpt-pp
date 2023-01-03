@@ -3,11 +3,9 @@
 namespace transforms {
 
 void BlackAndWhite(Image& image) {
-    for (auto& line : image.Pixels) {
-        for (auto& pixel : line) {
-            pixel.SetAll(pixel.Average());
-        }
-    }
+    image.ForEachPixel([&](RgbValue& r) {
+        r.SetAll(r.Average());
+    });
 }
 
 } // namespace transforms
