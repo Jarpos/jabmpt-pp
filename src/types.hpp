@@ -84,7 +84,7 @@ struct Image {
         for (const auto& i : Indices) {
             if (y + i.first >= 0 && y + i.first < Height()) {
                 if (x + i.second >= 0 && x + i.second < Width()) {
-                    surrounding.emplace_front(At(y + i.first, x + i.second));
+                    surrounding.emplace_back(At(y + i.first, x + i.second));
                 }
             }
         }
