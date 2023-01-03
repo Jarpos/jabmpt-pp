@@ -53,15 +53,15 @@ struct Image {
 
     std::vector<std::vector<RgbValue>> Pixels;
 
-    size_t Width() const {
+    size_t Width() const noexcept {
         return Pixels.at(0).size();
     }
 
-    size_t Height() const {
+    size_t Height() const noexcept {
         return Pixels.size();
     }
 
-    BYTE Padding() const {
+    BYTE Padding() const noexcept {
         return 4 - (Width() * sizeof(RgbValue) % 4) % 4;
     }
 
