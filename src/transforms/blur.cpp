@@ -5,9 +5,11 @@
 namespace transforms {
 
 void Blur(Image& image) {
+    Image copy(image);
+
     for (int y = 0; y < image.Height(); y++) {
         for (int x = 0; x < image.Width(); x++) {
-            std::list<RgbValue> cells = image.GetSurrounding(y, x);
+            std::list<RgbValue> cells = copy.GetSurrounding(y, x);
             image.At(y, x).SetAll(0);
 
             // TODO: Maybe change this, to account for integer rounding?
