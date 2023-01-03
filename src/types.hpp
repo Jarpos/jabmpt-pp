@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cstdint>
+#include <functional>
 #include <list>
 #include <vector>
 
@@ -29,6 +30,10 @@ struct RgbValue {
         Red = red;
         Green = green;
         Blue = blue;
+    }
+
+    void Set(RgbValue r) {
+        Set(r.Red, r.Green, r.Blue);
     }
 
     constexpr void SetAll(BYTE value) {
@@ -85,5 +90,13 @@ struct Image {
         }
 
         return surrounding;
+    }
+
+    void ForEachPixel(std::function<void(RgbValue&)> fnc) {
+        for (auto& line : Pixels) {
+            for (auto& pixel : line) {
+                fnc(pixel);
+            }
+        }
     }
 };
