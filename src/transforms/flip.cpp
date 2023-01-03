@@ -5,8 +5,8 @@
 namespace transforms {
 
 void FlipX(Image& image) {
-    for (int y = 0; y < image.Height(); y++) {
-        std::reverse(image.Pixels[y].begin(), image.Pixels[y].end());
+    for (auto& line : image.Pixels) {
+        std::reverse(line.begin(), line.end());
     }
 }
 
