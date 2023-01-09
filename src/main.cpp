@@ -1,6 +1,7 @@
 #include "transforms/transformations.hpp"
 #include "types.hpp"
 
+#include <chrono>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -10,6 +11,16 @@ void WriteImageToBmp(const std::string& path, const Image& image);
 
 void PrintHelp();
 std::string GetInput();
+
+void TimeTransform(const transforms::transformation_t& t, Image& i) {
+    auto start = std::chrono::high_resolution_clock::now();
+    t(i);
+    auto stop = std::chrono::high_resolution_clock::now();
+
+#if !NDEBUG
+    std::cout << "Took: " << std::chrono::duration_cast<std::chrono::milliseconds>(stop - start) << "\n";
+#endif
+}
 
 int main(int argc, char* argv[]) {
     if (argc != 3) {
@@ -25,7 +36,7 @@ int main(int argc, char* argv[]) {
     while ((input = GetInput()) != "") {
         const auto& t = transforms::Transformations.find(input[0]);
         if (t != transforms::Transformations.end()) {
-            t->second.Function(image);
+            TimeTransform(t->second.Function, image);
             std::cout << t->second.ActionDescription << "\n";
         } else {
             std::cout << "Couldn't find transformation " << input[0] << "\n";
