@@ -92,6 +92,20 @@ struct Image {
         return surrounding;
     }
 
+    int GetSurroundingQuick(size_t y, size_t x, std::array<RgbValue, 9>& result) {
+        int count = 0;
+        for (int yc = -1; yc < 2; yc++) {
+            for (int xc = -1; xc < 2; xc++) {
+                if (y + yc >= 0 && y + yc < Height()) {
+                    if (x + xc >= 0 && x + xc < Width()) {
+                        result[count++] = At(y + yc, x + xc);
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
     void ForEachPixel(std::function<void(RgbValue&)> fnc) {
         for (auto& line : Pixels) {
             for (auto& pixel : line) {
