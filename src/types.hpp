@@ -54,10 +54,6 @@ struct Image {
         return Pixels.size();
     }
 
-    uint8_t Padding() const {
-        return 4 - (Width() * sizeof(RgbValue) % 4) % 4;
-    }
-
     const RgbValue& At(size_t y, size_t x) const {
         return Pixels.at(y).at(x);
     }

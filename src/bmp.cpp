@@ -8,13 +8,17 @@ typedef uint16_t WORD;
 typedef uint32_t DWORD;
 typedef int32_t LONG;
 
+struct BitmapFileHeader_t;
+struct BitmapInfoHeader_t;
+uint8_t Padding(const Image& image);
+
 // See: https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapfileheader
 #pragma pack(1)
 struct BitmapFileHeader_t {
     BitmapFileHeader_t() : BitmapFileHeader_t(0) {}
     BitmapFileHeader_t(DWORD size) : Type(0x4D42), Size(size), Reserved1(0), Reserved2(0), OffBits(54) {}
     BitmapFileHeader_t(Image i) :
-        BitmapFileHeader_t(i.Width() * i.Height() * sizeof(RgbValue) + i.Height() * i.Padding() + 54) {}
+        BitmapFileHeader_t(i.Width() * i.Height() * sizeof(RgbValue) + i.Height() * Padding(i) + 54) {}
 
     WORD Type;      // FileType - must be "BM" (or 0x42 0x4D or 19778 or 0x4D42)
     DWORD Size;     // Size, in bytes, of the bitmap file
@@ -64,7 +68,7 @@ Image ReadImageFromBmp(const std::string& path) {
     ifile.seekg(fileHeader.OffBits, std::ios::beg);
     for (int i = 0; i < infoHeader.Height; i++) {
         ifile.read(reinterpret_cast<char*>(&(image.Pixels[i][0])), infoHeader.Width * sizeof(RgbValue));
-        ifile.seekg(image.Padding(), std::ios::cur);
+        ifile.seekg(Padding(image), std::ios::cur);
     }
 
     return image;
@@ -85,8 +89,12 @@ void WriteImageToBmp(const std::string& path, const Image& image) {
     // Write Bitmap
     for (int i = 0; i < infoHeader.Height; i++) {
         ofile.write(reinterpret_cast<const char*>(&(image.Pixels[i][0])), image.Width() * sizeof(RgbValue));
-        for (int k = 0; k < image.Padding(); k++) {
+        for (int k = 0; k < Padding(image); k++) {
             ofile.write("\0", sizeof(BYTE));
         }
     }
+}
+
+uint8_t Padding(const Image& image) {
+    return 4 - (image.Width() * sizeof(RgbValue) % 4) % 4;
 }
