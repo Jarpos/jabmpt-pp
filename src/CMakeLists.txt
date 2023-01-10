@@ -5,13 +5,17 @@
 # Add source to this project's executable.
 add_executable(jabmpt-pp
     "main.cpp"
+
     "images/bmp.cpp"
     "images/image.cpp"
+
     "transforms/blackwhite.cpp"
-    "transforms/flip.cpp"
     "transforms/blur.cpp"
     "transforms/channels.cpp"
-    "transforms/invert.cpp")
+    "transforms/flip.cpp"
+    "transforms/edgedetection.cpp"
+    "transforms/invert.cpp"
+)
 
 set(CMAKE_BUILD_TYPE Debug)
 
