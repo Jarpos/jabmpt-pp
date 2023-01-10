@@ -11,17 +11,7 @@ void WriteImageToBmp(const std::string& path, const Image& image);
 
 void PrintHelp();
 std::string GetInput();
-
-void TimeTransform(const transforms::transformation_t& t, Image& i) {
-    auto start = std::chrono::high_resolution_clock::now();
-    t(i);
-    auto stop = std::chrono::high_resolution_clock::now();
-
-#if !NDEBUG
-    auto time = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count();
-    std::cout << "Took: " << time << "ms\n";
-#endif
-}
+void TimeTransform(const transforms::transformation_t& t, Image& i);
 
 int main(int argc, char* argv[]) {
     if (argc != 3) {
@@ -63,4 +53,15 @@ std::string GetInput() {
     std::string input;
     std::getline(std::cin, input);
     return input;
+}
+
+void TimeTransform(const transforms::transformation_t& t, Image& i) {
+    auto start = std::chrono::high_resolution_clock::now();
+    t(i);
+    auto stop = std::chrono::high_resolution_clock::now();
+
+#if !NDEBUG
+    auto time = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count();
+    std::cout << "Took: " << time << "ms\n";
+#endif
 }
