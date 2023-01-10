@@ -1,5 +1,5 @@
 #include "transforms/transformations.hpp"
-#include "types.hpp"
+#include "images/image.hpp"
 
 #include <chrono>
 #include <fstream>

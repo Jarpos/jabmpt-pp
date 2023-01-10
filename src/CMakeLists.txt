@@ -5,7 +5,8 @@
 # Add source to this project's executable.
 add_executable(jabmpt-pp
     "main.cpp"
-    "bmp.cpp"
+    "images/bmp.cpp"
+    "images/image.cpp"
     "transforms/blackwhite.cpp"
     "transforms/flip.cpp"
     "transforms/blur.cpp"

@@ -1,4 +1,4 @@
-#include "../types.hpp"
+#include "../images/image.hpp"
 
 #include <algorithm>
 #include <array>

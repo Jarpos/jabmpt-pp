@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../types.hpp"
+#include "../images/image.hpp"
 
 #include <functional>
 #include <unordered_map>

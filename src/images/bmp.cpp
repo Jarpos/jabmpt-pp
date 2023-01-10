@@ -1,4 +1,4 @@
-#include "types.hpp"
+#include "image.hpp"
 
 #include <fstream>
 #include <string>
