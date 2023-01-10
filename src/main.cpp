@@ -18,7 +18,8 @@ void TimeTransform(const transforms::transformation_t& t, Image& i) {
     auto stop = std::chrono::high_resolution_clock::now();
 
 #if !NDEBUG
-    std::cout << "Took: " << std::chrono::duration_cast<std::chrono::milliseconds>(stop - start) << "\n";
+    auto time = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count();
+    std::cout << "Took: " << time << "ms\n";
 #endif
 }
 
