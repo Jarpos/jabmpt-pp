@@ -14,12 +14,12 @@ size_t Image::Height() const {
     return Pixels.size();
 }
 
-const RgbValue& Image::At(size_t y, size_t x) const {
+RgbValue& Image::At(size_t y, size_t x) {
     return Pixels.at(y).at(x);
 }
 
-RgbValue& Image::At(size_t y, size_t x) {
-    return Pixels.at(y).at(x);
+const RgbValue& Image::At(size_t y, size_t x) const {
+    return At(y, x);
 }
 
 std::list<RgbValue> Image::GetSurrounding(size_t y, size_t x) {

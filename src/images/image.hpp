@@ -48,8 +48,8 @@ struct Image {
     size_t Width() const;
     size_t Height() const;
 
-    const RgbValue& At(size_t y, size_t x) const;
     RgbValue& At(size_t y, size_t x);
+    const RgbValue& At(size_t y, size_t x) const;
 
     std::list<RgbValue> GetSurrounding(size_t y, size_t x);
     int GetSurroundingQuick(size_t y, size_t x, std::array<RgbValue, 9>& result);
