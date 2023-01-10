@@ -35,12 +35,14 @@ int main(int argc, char* argv[]) {
     PrintHelp();
     std::string input;
     while ((input = GetInput()) != "") {
-        const auto& t = transforms::Transformations.find(input[0]);
-        if (t != transforms::Transformations.end()) {
-            TimeTransform(t->second.Function, image);
-            std::cout << t->second.ActionDescription << "\n";
-        } else {
-            std::cout << "Couldn't find transformation " << input[0] << "\n";
+        for (const auto& c : input) {
+            const auto& t = transforms::Transformations.find(c);
+            if (t != transforms::Transformations.end()) {
+                TimeTransform(t->second.Function, image);
+                std::cout << t->second.ActionDescription << "\n";
+            } else {
+                std::cout << "Couldn't find transformation " << c << "\n";
+            }
         }
     }
 
