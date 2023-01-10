@@ -6,27 +6,20 @@
 #include <list>
 #include <vector>
 
-typedef uint8_t BYTE;
-typedef uint16_t WORD;
-typedef uint32_t DWORD;
-typedef int32_t LONG;
-
-struct BitmapFileHeader_t;
-struct BitmapInfoHeader_t;
 struct RgbValue;
 struct Image;
 
 #pragma pack(1)
 struct RgbValue {
     RgbValue() : RgbValue(0, 0, 0) {}
-    RgbValue(BYTE red, BYTE green, BYTE blue) : Red(red), Green(green), Blue(blue) {}
+    RgbValue(uint8_t red, uint8_t green, uint8_t blue) : Red(red), Green(green), Blue(blue) {}
 
     // Members have to be sorted like this, because of Endianess
-    BYTE Blue;  // Blue channel
-    BYTE Green; // Green channel
-    BYTE Red;   // Red channel
+    uint8_t Blue;  // Blue channel
+    uint8_t Green; // Green channel
+    uint8_t Red;   // Red channel
 
-    constexpr void Set(BYTE red, BYTE green, BYTE blue) {
+    constexpr void Set(uint8_t red, uint8_t green, uint8_t blue) {
         Red = red;
         Green = green;
         Blue = blue;
@@ -36,18 +29,18 @@ struct RgbValue {
         Set(r.Red, r.Green, r.Blue);
     }
 
-    constexpr void SetAll(BYTE value) {
+    constexpr void SetAll(uint8_t value) {
         Set(value, value, value);
     }
 
-    constexpr BYTE Average() const {
+    constexpr uint8_t Average() const {
         return (Red + Green + Blue) / 3;
     }
 };
 #pragma pack()
 
 struct Image {
-    Image(LONG width, LONG height) : Pixels(height, std::vector<RgbValue>(width, RgbValue())) {}
+    Image(size_t width, size_t height) : Pixels(height, std::vector<RgbValue>(width, RgbValue())) {}
 
     Image(const Image& image) = default;
 
@@ -61,7 +54,7 @@ struct Image {
         return Pixels.size();
     }
 
-    BYTE Padding() const {
+    uint8_t Padding() const {
         return 4 - (Width() * sizeof(RgbValue) % 4) % 4;
     }
 

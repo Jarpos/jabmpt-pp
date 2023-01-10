@@ -3,6 +3,11 @@
 #include <fstream>
 #include <string>
 
+typedef uint8_t BYTE;
+typedef uint16_t WORD;
+typedef uint32_t DWORD;
+typedef int32_t LONG;
+
 // See: https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapfileheader
 #pragma pack(1)
 struct BitmapFileHeader_t {
