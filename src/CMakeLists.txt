@@ -7,6 +7,7 @@ add_executable(jabmpt-pp
     "main.cpp"
 
     "images/bmp.cpp"
+    "images/png.cpp"
     "images/image.cpp"
 
     "transforms/blackwhite.cpp"
