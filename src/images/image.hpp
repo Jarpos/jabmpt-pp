@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <cmath>
 #include <cstdint>
 #include <functional>
 #include <list>
@@ -36,6 +37,42 @@ struct RgbValue {
     constexpr uint8_t Average() const {
         // TODO: Fix possible overflow problem
         return (Red + Green + Blue) / 3;
+    }
+
+    RgbValue Square() const {
+        return RgbValue(Red * Red, Green * Green, Blue * Blue);
+    }
+
+    RgbValue Sqrt() const {
+        return RgbValue(std::sqrt(Red), std::sqrt(Green), std::sqrt(Blue));
+    }
+
+    friend RgbValue operator*(RgbValue lhs, uint8_t rhs) {
+        lhs.Red *= rhs;
+        lhs.Green *= rhs;
+        lhs.Blue *= rhs;
+        return lhs;
+    }
+
+    friend RgbValue operator*(RgbValue lhs, const RgbValue& rhs) {
+        lhs.Red *= rhs.Red;
+        lhs.Green *= rhs.Green;
+        lhs.Blue *= rhs.Blue;
+        return lhs;
+    }
+
+    friend RgbValue operator+(RgbValue lhs, uint8_t rhs) {
+        lhs.Red += rhs;
+        lhs.Green += rhs;
+        lhs.Blue += rhs;
+        return lhs;
+    }
+
+    friend RgbValue operator+(RgbValue lhs, const RgbValue& rhs) {
+        lhs.Red += rhs.Red;
+        lhs.Green += rhs.Green;
+        lhs.Blue += rhs.Blue;
+        return lhs;
     }
 };
 #pragma pack()
