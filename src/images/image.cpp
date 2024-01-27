@@ -19,7 +19,7 @@ RgbValue& Image::At(size_t y, size_t x) {
 }
 
 const RgbValue& Image::At(size_t y, size_t x) const {
-    return At(y, x);
+    return Pixels.at(y).at(x);
 }
 
 std::list<RgbValue> Image::GetSurrounding(size_t y, size_t x) {
