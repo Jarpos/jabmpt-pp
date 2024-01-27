@@ -34,6 +34,7 @@ struct RgbValue {
     }
 
     constexpr uint8_t Average() const {
+        // TODO: Fix possible overflow problem
         return (Red + Green + Blue) / 3;
     }
 };
